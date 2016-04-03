@@ -1,3 +1,5 @@
+"use strict";
+
 var FizzBuzz = FizzBuzz || {};
 
 FizzBuzz.Transform = function(n) {
@@ -22,17 +24,27 @@ document.addEventListener("DOMContentLoaded", function(event) {
         sequence = FizzBuzz.Sequence(20),
         rows = sequence.map(function(value, index) {
             var row = document.createElement("div"),
+				classOddEven = index % 2 == 0 ? "even" : "odd",
                 indexNode = document.createElement("div"),
                 fizzbuzzNode = document.createElement("div");
+
             row.className="row";
-            indexNode.className = "index";
-            fizzbuzzNode.className = "fizzbuzz";
+			row.className = row.className;
+
+            indexNode.className = "index " + classOddEven;
+            fizzbuzzNode.className = "fizzbuzz " + classOddEven;
+
             row.appendChild(indexNode);
             row.appendChild(fizzbuzzNode);
+
             indexNode.innerHTML = (1 + parseInt(index)).toString();
             fizzbuzzNode.innerHTML = value;
+
+			return row;
         });
 
-    resultsNode.appendChild(rows);
+	rows.forEach(function(row) {
+		resultsNode.appendChild(row);
+	});
 });
 
